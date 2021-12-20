@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "[DEBUG] allowed-licenses: ${INPUT_ALLOWED_LICENSES}"
+echo "[DEBUG] ignored-authors: ${INPUT_IGNORED_AUTHORS}"
+
 permissiveLicenses=(${INPUT_ALLOWED_LICENSES//,/ })
 ignoredAuthors=()
 if [ -n "$INPUT_IGNORED_AUTHORS" ]; then
