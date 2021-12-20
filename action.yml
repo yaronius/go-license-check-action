@@ -2,6 +2,14 @@
 name: 'Go package license checker'
 author: 'yaronius'
 description: 'Check for not allowed licenses in your go package'
+inputs:
+  allowed-licenses:
+    description: 'Comma-separated names of allowed licenses'
+    required: false
+    default: 'MIT,Apache-2.0,BSD-2-Clause,BSD-3-Clause'
+  ignored-authors:
+    description: 'Comma-separated names of authors/organisations that will be ignored while checking. Useful to add your own organisation.'
+    required: false
 runs:
   using: "composite"
   steps:

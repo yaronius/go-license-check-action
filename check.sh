@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-# TODO inject the list of permitted licenses
-permissiveLicenses=("MIT" "Apache-2.0" "BSD-2-Clause" "BSD-3-Clause")
+permissiveLicenses=(${INPUT_ALLOWED_LICENSES//,/ })
+ignoredAuthors=(${INPUT_IGNORED_AUTHORS//,/ })
 data=$(go-licenses csv . 2>/dev/null)
 foundProhibited=false
 for line in $data; do
   package=$(echo "$line" | cut -d, -f 1)
+  packageAuthor=$(echo "$package" | cut -d/ -f 2)
+  for i in "${ignoredAuthors[@]}"; do
+      if [ "$i" == "$packageAuthor" ] ; then
+          continue 2
+      fi
+  done
   license=$(echo "$line" | cut -d, -f 3)
-  for i in "${permissiveLicenses[@]}"; do
-      if [ "$i" == "$license" ] ; then
+  for j in "${permissiveLicenses[@]}"; do
+      if [ "$j" == "$license" ] ; then
           continue 2
       fi
   done
