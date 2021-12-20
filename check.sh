@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo "allowed-licenses: ${INPUT_ALLOWED_LICENSES}"
-echo "ignored-authors: ${INPUT_IGNORED_AUTHORS}"
+echo "allowed_licenses: ${INPUT_ALLOWED_LICENSES}"
+echo "ignored_authors: ${INPUT_IGNORED_AUTHORS}"
 
 permissiveLicenses=(${INPUT_ALLOWED_LICENSES//,/ })
 ignoredAuthors=()
