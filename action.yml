@@ -1,0 +1,18 @@
+# action.yml
+name: 'Go package license checker'
+author: 'yaronius'
+description: 'Check for not allowed licenses in your go package'
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Go 1.17
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+      id: go
+    - name: Get google/go-licenses package
+      run: go install github.com/google/go-licenses@latest
+      shell: bash
+    - name: Run Check
+      run: ${{ github.action_path }}/check.sh
+      shell: bash
