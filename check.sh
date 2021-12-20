@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 permissiveLicenses=(${INPUT_ALLOWED_LICENSES//,/ })
-ignoredAuthors=(${INPUT_IGNORED_AUTHORS//,/ })
+ignoredAuthors=()
+if [ -n "$INPUT_IGNORED_AUTHORS" ]; then
+  ignoredAuthors=(${INPUT_IGNORED_AUTHORS//,/ })
+fi
 data=$(go-licenses csv . 2>/dev/null)
 foundProhibited=false
 for line in $data; do
@@ -19,7 +22,7 @@ for line in $data; do
       fi
   done
   foundProhibited=true
-  echo "package $package is using prohibited license: $license";
+  echo "package $package is using prohibited license: $license"
 done
 
 if [[ $foundProhibited == true ]] ; then
