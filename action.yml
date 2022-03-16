@@ -24,3 +24,6 @@ runs:
     - name: Run Check
       run: ${{ github.action_path }}/check.sh
       shell: bash
+      env:
+        IGNORED_AUTHORS: ${{ inputs.ignored_authors }}
+        ALLOWED_LICENSES: ${{ inputs.allowed_licenses }}

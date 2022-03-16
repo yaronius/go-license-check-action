@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-echo "allowed_licenses: ${INPUT_ALLOWED_LICENSES}"
-echo "ignored_authors: ${INPUT_IGNORED_AUTHORS}"
+echo "allowed_licenses: ${ALLOWED_LICENSES}"
+echo "ignored_authors: ${IGNORED_AUTHORS}"
 
-permissiveLicenses=(${INPUT_ALLOWED_LICENSES//,/ })
+permissiveLicenses=(${ALLOWED_LICENSES//,/ })
 ignoredAuthors=()
-if [ -n "$INPUT_IGNORED_AUTHORS" ]; then
-  ignoredAuthors=(${INPUT_IGNORED_AUTHORS//,/ })
+if [ -n "$IGNORED_AUTHORS" ]; then
+  ignoredAuthors=(${IGNORED_AUTHORS//,/ })
 fi
 data=$(go-licenses csv . 2>/dev/null)
 foundProhibited=false
